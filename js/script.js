@@ -37,6 +37,23 @@ createApp({
         },
         thbActive(index) {
             return (index == this.thumbActive) ? "thumb active" : "thumb";
+        },
+        next() {
+            if(this.imageActive < 4 && this.thumbActive < 4) {
+                this.imageActive++
+                this.thumbActive++
+            }else{
+                this.imageActive = 0
+                this.thumbActive = 0
+            }
+        },
+        prev() {
+            this.imageActive--
+            this.thumbActive--
+            if(this.imageActive < 0 && this.thumbActive < 0) {
+                this.imageActive = 4
+                this.thumbActive = 4
+            }
         }
     },
 }).mount('#app')
