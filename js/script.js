@@ -27,33 +27,49 @@ createApp({
                     text: 'Marvel\'s Avengers is an epic, third-person, action-adventure game that combines an original, cinematic story with single-player and co-operative gameplay.',
                 }
             ],
-            imageActive : 0,
-            thumbActive : 0
+            //creo variabile di appoggio per immagine e thum attiva e gli do valore 0 all'inizio
+            imageActive: 0,
+            thumbActive: 0,
+            timer: 0
         }
     },
     methods: {
+        //funzione per immagine attiva che se è uguale all?indice aggiunge la classe block senno rimane none
         imgActive(index) {
-          return (index == this.imageActive) ? "img-block" : "none";
+            return (index == this.imageActive) ? "img-block" : "none";
         },
+        //funzione che fa la stessa cosa ma per le thumb ma qui gioco di opacity perchè sono sempre visibili
         thbActive(index) {
             return (index == this.thumbActive) ? "thumb active" : "thumb";
         },
+        //funzione per bottone next e se l'immagine è l'ultima passa di nuovo alla prima senza bloccarsi
         next() {
-            if(this.imageActive < 4 && this.thumbActive < 4) {
-                this.imageActive++
-                this.thumbActive++
-            }else{
-                this.imageActive = 0
-                this.thumbActive = 0
-            }
+            //aggiungo clear per il timer che ogni volta che clicco sul bottone opposto mi resetta il timer che c'era impostato su quel bottone autoplay
+            clearInterval(this.timer)
+            //funzione per autoplay che al click sul bottone avanti ogni secondo cambia slide e quando clicco sull'altro bottone il timer viene azzerato
+            this.timer = setInterval(() => {
+                if (this.imageActive < 4 && this.thumbActive < 4) {
+                    this.imageActive++
+                    this.thumbActive++
+                } else {
+                    this.imageActive = 0
+                    this.thumbActive = 0
+                }
+            }, 1000);
         },
+        //stessa funzione ma per il bottone che torna indietro e quindi se e la prima va all'ultima immagine
         prev() {
-            this.imageActive--
-            this.thumbActive--
-            if(this.imageActive < 0 && this.thumbActive < 0) {
-                this.imageActive = 4
-                this.thumbActive = 4
-            }
+            //aggiungo clear per il timer che ogni volta che clicco sul bottone opposto mi resetta il timer che c'era impostato su quel bottone con autoplay
+            clearInterval(this.timer)
+            //funzione per autoplay che al click sul bottone avanti ogni secondo cambia slide e quando clicco sull'altro bottone il timer viene azzerato
+            this.timer = setInterval(() => {
+                this.imageActive--
+                this.thumbActive--
+                if (this.imageActive < 0 && this.thumbActive < 0) {
+                    this.imageActive = 4
+                    this.thumbActive = 4
+                }
+            }, 1000);
         }
     },
 }).mount('#app')
