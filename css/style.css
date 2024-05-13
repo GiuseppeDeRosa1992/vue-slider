@@ -11,6 +11,14 @@
     align-items: center;
 }
 
+.none {
+    display: none;
+}
+
+.img-block {
+    display: block;
+}
+
 .item {
     float: left;
     width: 700px;
