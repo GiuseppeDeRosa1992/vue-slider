@@ -17,7 +17,7 @@
         <div class="container">
             <div class="slider-wrapper" tabindex="0">
 
-                <div class="item"  v-for="slide, i in slides" :class="imgActive(i)">
+                <div class="item" @mouseover="stop()" @mouseleave="noStopNext()" v-for="slide, i in slides" :class="imgActive(i)">
                     <img :src="slide.image" :alt="slide.title" />
                     <div class="text">
                         <h3> {{ slide.title }}</h3>

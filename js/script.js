@@ -48,9 +48,9 @@ createApp({
             clearInterval(this.timer)
             //funzione per autoplay che al click sul bottone avanti ogni secondo cambia slide e quando clicco sull'altro bottone il timer viene azzerato
             this.timer = setInterval(() => {
-                if (this.imageActive < 4 && this.thumbActive < 4) {
-                    this.imageActive++
-                    this.thumbActive++
+                this.imageActive++
+                this.thumbActive++
+                if (this.imageActive < this.slides.length && this.thumbActive < this.slides.length) {
                 } else {
                     this.imageActive = 0
                     this.thumbActive = 0
@@ -66,10 +66,16 @@ createApp({
                 this.imageActive--
                 this.thumbActive--
                 if (this.imageActive < 0 && this.thumbActive < 0) {
-                    this.imageActive = 4
-                    this.thumbActive = 4
+                    this.imageActive = this.slides.length - 1
+                    this.thumbActive = this.slides.length - 1
                 }
             }, 1000);
-        }
+        },
+        stop() {
+            clearInterval(this.timer)
+        },
+        noStopNext() {
+            this.next()
+        },
     },
 }).mount('#app')
